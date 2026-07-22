@@ -1,22 +1,46 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 
 <section class="py-5">
 
-    <div class="container text-center">
+    <div class="container">
 
-        <h1 class="display-4 fw-bold">
-            Welcome to Hindustan Mega Mart
-        </h1>
+        <div class="row align-items-center">
 
-        <p class="lead mt-3">
-            Fresh groceries delivered to your doorstep with quality you can trust.
-        </p>
+            <!-- Left Column -->
+            <div class="col-lg-6">
 
-        <a href="#" class="btn btn-success btn-lg mt-4">
-            Shop Now
-        </a>
+                <span class="badge bg-success mb-3">
+                    Fresh Grocery Store
+                </span>
+
+                <h1 class="display-4 fw-bold">
+                    Fresh Groceries Delivered To Your Doorstep
+                </h1>
+
+                <p class="lead mt-3">
+                    Shop fresh vegetables, fruits, dairy products, beverages and daily essentials at affordable prices.
+                </p>
+
+                <a href="#" class="btn btn-success btn-lg mt-3">
+                    Shop Now
+                </a>
+
+            </div>
+
+            <!-- Right Column -->
+            <div class="col-lg-6 text-center">
+
+                <img
+                    src="{% static 'images/hero-grocery.jpg' %}"
+                    class="img-fluid rounded"
+                    alt="Fresh Groceries">
+
+            </div>
+
+        </div>
 
     </div>
 
