@@ -2,6 +2,8 @@
 {% load static %}
 
 {% block content %}
+
+<!-- Search Section -->
 <section class="bg-light py-4">
 
     <div class="container">
@@ -41,6 +43,7 @@
 
 </section>
 
+<!-- Hero Section -->
 <section class="py-5">
 
     <div class="container">
@@ -78,7 +81,7 @@
 
             </div>
 
-               </div>
+        </div>
 
     </div>
 
@@ -145,5 +148,76 @@
 
 </section>
 
+<!-- Featured Products -->
+<section class="py-5">
+
+    <div class="container">
+
+        <!-- Section Heading -->
+        <div class="text-center mb-5">
+
+            <h2 class="fw-bold">
+                Featured Products
+            </h2>
+
+            <p class="text-muted">
+                Discover our fresh and popular grocery items.
+            </p>
+
+        </div>
+
+        <!-- Product Cards -->
+        <div class="row g-4">
+
+    {% for product in products %}
+
+    <div class="col-lg-3 col-md-6">
+
+        <div class="card shadow h-100">
+
+            {% if product.image %}
+                <img src="{{ product.image.url }}"
+                     class="card-img-top"
+                     alt="{{ product.name }}"
+                     style="height:220px; object-fit:cover;">
+            {% endif %}
+
+            <div class="card-body text-center">
+
+                <h5 class="card-title">
+                    {{ product.name }}
+                </h5>
+
+                <p class="text-success fw-bold fs-5">
+                    ₹{{ product.price }}
+                </p>
+
+                <p class="text-muted">
+                    Stock: {{ product.stock }}
+                </p>
+
+                <button class="btn btn-success w-100">
+                    Add to Cart
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    {% empty %}
+
+    <div class="col-12 text-center">
+        <h5>No products available.</h5>
+    </div>
+
+    {% endfor %}
+
+</div>
+
+    </div>
+
+</section>
 
 {% endblock %}
