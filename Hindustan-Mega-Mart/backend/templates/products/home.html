@@ -13,12 +13,18 @@
             <!-- Search -->
             <div class="col-lg-6">
 
-                <form>
+                <form method="GET" class="d-flex">
 
                     <input
                         type="text"
-                        class="form-control form-control-lg"
-                        placeholder="Search for milk, fruits, vegetables...">
+                        name="search"
+                        class="form-control form-control-lg me-2"
+                        placeholder="Search for milk, fruits, vegetables..."
+                        value="{{ search_query }}">
+
+                    <button class="btn btn-success" type="submit">
+                        Search
+                    </button>
 
                 </form>
 
@@ -170,7 +176,8 @@
                 <div class="card shadow h-100">
 
                     {% if product.image %}
-                    <img src="{{ product.image.url }}"
+                    <img
+                        src="{{ product.image.url }}"
                         class="card-img-top"
                         alt="{{ product.name }}"
                         style="height:220px; object-fit:cover;">
