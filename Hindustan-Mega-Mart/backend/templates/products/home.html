@@ -123,8 +123,11 @@
                         <h1>🛒</h1>
 
                         <h5>
-                            {{ category.name }}
-                        </h5>
+    <a href="?category={{ category.slug }}"
+       class="text-decoration-none text-dark">
+        {{ category.name }}
+    </a>
+</h5>
 
                     </div>
 
