@@ -49,6 +49,7 @@
 
 </section>
 
+
 <!-- Hero Section -->
 <section class="py-5">
 
@@ -93,6 +94,7 @@
 
 </section>
 
+
 <!-- Shop by Categories -->
 <section class="py-5 bg-light">
 
@@ -123,11 +125,14 @@
                         <h1>🛒</h1>
 
                         <h5>
-    <a href="?category={{ category.slug }}"
-       class="text-decoration-none text-dark">
-        {{ category.name }}
-    </a>
-</h5>
+                            <a
+                                href="?category={{ category.slug }}"
+                                class="text-decoration-none text-dark">
+
+                                {{ category.name }}
+
+                            </a>
+                        </h5>
 
                     </div>
 
@@ -139,7 +144,9 @@
 
             <div class="col-12 text-center">
 
-                <h5>No categories available.</h5>
+                <h5>
+                    No categories available.
+                </h5>
 
             </div>
 
@@ -150,6 +157,84 @@
     </div>
 
 </section>
+
+
+<!-- Shop by Brands -->
+<!-- Shop by Brands -->
+<section class="py-5">
+
+    <div class="container">
+
+        <div class="text-center mb-5">
+
+            <h2 class="fw-bold">
+                Shop by Brands
+            </h2>
+
+            <p class="text-muted">
+                Explore products from your favourite brands.
+            </p>
+
+        </div>
+
+        <div class="row g-4">
+
+            {% for brand in brands %}
+
+            <div class="col-lg-3 col-md-6">
+
+                <a
+                    href="?brand={{ brand.slug }}"
+                    class="text-decoration-none text-dark">
+
+                    <div class="card shadow h-100 text-center">
+
+                        <div class="card-body">
+
+                            {% if brand.logo %}
+
+                            <img
+                                src="{{ brand.logo.url }}"
+                                alt="{{ brand.name }}"
+                                class="img-fluid mb-3"
+                                style="height:80px; object-fit:contain;">
+
+                            {% else %}
+
+                            <h1>🏷️</h1>
+
+                            {% endif %}
+
+                            <h5>
+                                {{ brand.name }}
+                            </h5>
+
+                        </div>
+
+                    </div>
+
+                </a>
+
+            </div>
+
+            {% empty %}
+
+            <div class="col-12 text-center">
+
+                <h5>
+                    No brands available.
+                </h5>
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
 
 <!-- Featured Products -->
 <section class="py-5">
@@ -179,11 +264,13 @@
                 <div class="card shadow h-100">
 
                     {% if product.image %}
+
                     <img
                         src="{{ product.image.url }}"
                         class="card-img-top"
                         alt="{{ product.name }}"
                         style="height:220px; object-fit:cover;">
+
                     {% endif %}
 
                     <div class="card-body text-center">
@@ -214,7 +301,9 @@
 
             <div class="col-12 text-center">
 
-                <h5>No products available.</h5>
+                <h5>
+                    No products available.
+                </h5>
 
             </div>
 
