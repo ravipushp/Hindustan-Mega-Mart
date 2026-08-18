@@ -10,9 +10,10 @@
 
         <div class="row g-3 align-items-center">
 
-            <!-- Search -->
+            <!-- Search and Price Filters -->
             <div class="col-lg-6">
 
+                <!-- Search -->
                 <form method="GET" class="d-flex">
 
                     <input
@@ -22,9 +23,53 @@
                         placeholder="Search for milk, fruits, vegetables..."
                         value="{{ search_query }}">
 
-                    <button class="btn btn-success" type="submit">
+                    <button
+                        class="btn btn-success"
+                        type="submit">
                         Search
                     </button>
+
+                </form>
+
+                <!-- Price Filter -->
+                <form method="GET" class="row g-2 mt-3">
+
+                    <!-- Minimum Price -->
+                    <div class="col-md-4">
+
+                        <input
+                            type="number"
+                            name="min_price"
+                            class="form-control"
+                            placeholder="Minimum Price"
+                            min="0"
+                            value="{{ min_price }}">
+
+                    </div>
+
+                    <!-- Maximum Price -->
+                    <div class="col-md-4">
+
+                        <input
+                            type="number"
+                            name="max_price"
+                            class="form-control"
+                            placeholder="Maximum Price"
+                            min="0"
+                            value="{{ max_price }}">
+
+                    </div>
+
+                    <!-- Price Filter Button -->
+                    <div class="col-md-4">
+
+                        <button
+                            type="submit"
+                            class="btn btn-outline-success w-100">
+                            Filter by Price
+                        </button>
+
+                    </div>
 
                 </form>
 
@@ -72,7 +117,9 @@
                     Shop fresh vegetables, fruits, dairy products, beverages and daily essentials at affordable prices.
                 </p>
 
-                <a href="#" class="btn btn-success btn-lg mt-3">
+                <a
+                    href="#"
+                    class="btn btn-success btn-lg mt-3">
                     Shop Now
                 </a>
 
@@ -122,9 +169,12 @@
 
                     <div class="card-body">
 
-                        <h1>🛒</h1>
+                        <h1>
+                            🛒
+                        </h1>
 
                         <h5>
+
                             <a
                                 href="?category={{ category.slug }}"
                                 class="text-decoration-none text-dark">
@@ -132,6 +182,7 @@
                                 {{ category.name }}
 
                             </a>
+
                         </h5>
 
                     </div>
@@ -159,7 +210,6 @@
 </section>
 
 
-<!-- Shop by Brands -->
 <!-- Shop by Brands -->
 <section class="py-5">
 
@@ -201,7 +251,9 @@
 
                             {% else %}
 
-                            <h1>🏷️</h1>
+                            <h1>
+                                🏷️
+                            </h1>
 
                             {% endif %}
 
@@ -287,7 +339,8 @@
                             Stock: {{ product.stock }}
                         </p>
 
-                        <button class="btn btn-success w-100">
+                        <button
+                            class="btn btn-success w-100">
                             Add to Cart
                         </button>
 
@@ -314,5 +367,6 @@
     </div>
 
 </section>
+
 
 {% endblock %}
