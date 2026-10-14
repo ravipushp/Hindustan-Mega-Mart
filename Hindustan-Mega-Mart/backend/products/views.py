@@ -11,6 +11,9 @@ def home(request):
     min_price = request.GET.get("min_price", "")
     max_price = request.GET.get("max_price", "")
 
+    # Get selected sorting option
+    sort_by = request.GET.get("sort", "")
+
     categories = Category.objects.filter(is_active=True)
     brands = Brand.objects.filter(is_active=True)
     products = Product.objects.filter(is_active=True)
@@ -45,6 +48,19 @@ def home(request):
             price__lte=max_price
         )
 
+    # Product Sorting
+    valid_sort_options = [
+        "name",
+        "-name",
+        "price",
+        "-price",
+    ]
+
+    if sort_by in valid_sort_options:
+        products = products.order_by(sort_by)
+    else:
+        sort_by = ""
+
     context = {
         "products": products,
         "categories": categories,
@@ -54,6 +70,7 @@ def home(request):
         "selected_brand": brand_slug,
         "min_price": min_price,
         "max_price": max_price,
+        "sort_by": sort_by,
     }
 
     return render(request, "products/home.html", context)

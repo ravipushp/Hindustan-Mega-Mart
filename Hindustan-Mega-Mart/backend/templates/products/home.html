@@ -1,3 +1,4 @@
+
 {% extends "base.html" %}
 {% load static %}
 
@@ -5,17 +6,14 @@
 
 <!-- Search Section -->
 <section class="bg-light py-4">
-
     <div class="container">
-
         <div class="row g-3 align-items-center">
 
             <!-- Search and Price Filters -->
             <div class="col-lg-6">
 
-                <!-- Search -->
+                <!-- Search Form -->
                 <form method="GET" class="d-flex">
-
                     <input
                         type="text"
                         name="search"
@@ -23,20 +21,21 @@
                         placeholder="Search for milk, fruits, vegetables..."
                         value="{{ search_query }}">
 
-                    <button
-                        class="btn btn-success"
-                        type="submit">
+                    <button class="btn btn-success" type="submit">
                         Search
                     </button>
-
                 </form>
 
-                <!-- Price Filter -->
+                <!-- Price Filter Form -->
                 <form method="GET" class="row g-2 mt-3">
 
-                    <!-- Minimum Price -->
-                    <div class="col-md-4">
+                    <!-- Preserve Search -->
+                    <input type="hidden" name="search" value="{{ search_query }}">
+                    <input type="hidden" name="category" value="{{ selected_category }}">
+                    <input type="hidden" name="brand" value="{{ selected_brand }}">
+                    <input type="hidden" name="sort" value="{{ sort_by }}">
 
+                    <div class="col-md-4">
                         <input
                             type="number"
                             name="min_price"
@@ -44,12 +43,9 @@
                             placeholder="Minimum Price"
                             min="0"
                             value="{{ min_price }}">
-
                     </div>
 
-                    <!-- Maximum Price -->
                     <div class="col-md-4">
-
                         <input
                             type="number"
                             name="max_price"
@@ -57,27 +53,20 @@
                             placeholder="Maximum Price"
                             min="0"
                             value="{{ max_price }}">
-
                     </div>
 
-                    <!-- Price Filter Button -->
                     <div class="col-md-4">
-
                         <button
                             type="submit"
                             class="btn btn-outline-success w-100">
                             Filter by Price
                         </button>
-
                     </div>
-
                 </form>
-
             </div>
 
             <!-- Delivery Info -->
             <div class="col-lg-6 text-lg-end">
-
                 <h6 class="mb-1">
                     📍 Deliver to: Phagwara
                 </h6>
@@ -85,26 +74,19 @@
                 <small class="text-muted">
                     🚚 Estimated Delivery: 20–30 Minutes
                 </small>
-
             </div>
 
         </div>
-
     </div>
-
 </section>
 
 
 <!-- Hero Section -->
 <section class="py-5">
-
     <div class="container">
-
         <div class="row align-items-center">
 
-            <!-- Left Column -->
             <div class="col-lg-6">
-
                 <span class="badge bg-success mb-3">
                     Fresh Grocery Store
                 </span>
@@ -114,259 +96,228 @@
                 </h1>
 
                 <p class="lead mt-3">
-                    Shop fresh vegetables, fruits, dairy products, beverages and daily essentials at affordable prices.
+                    Shop fresh vegetables, fruits, dairy products, beverages
+                    and daily essentials at affordable prices.
                 </p>
 
-                <a
-                    href="#"
-                    class="btn btn-success btn-lg mt-3">
+                <a href="#featured-products" class="btn btn-success btn-lg mt-3">
                     Shop Now
                 </a>
-
             </div>
 
-            <!-- Right Column -->
             <div class="col-lg-6 text-center">
-
                 <img
                     src="{% static 'images/hero-grocery.jpg' %}"
                     class="img-fluid rounded"
                     alt="Fresh Groceries">
-
             </div>
 
         </div>
-
     </div>
-
 </section>
 
 
 <!-- Shop by Categories -->
 <section class="py-5 bg-light">
-
     <div class="container">
 
         <div class="text-center mb-5">
-
-            <h2 class="fw-bold">
-                Shop by Categories
-            </h2>
-
+            <h2 class="fw-bold">Shop by Categories</h2>
             <p class="text-muted">
                 Explore our wide range of grocery categories.
             </p>
-
         </div>
 
         <div class="row g-4">
-
             {% for category in categories %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="card shadow h-100 text-center">
+                        <div class="card-body">
+                            <h1>🛒</h1>
 
-            <div class="col-lg-3 col-md-6">
-
-                <div class="card shadow h-100 text-center">
-
-                    <div class="card-body">
-
-                        <h1>
-                            🛒
-                        </h1>
-
-                        <h5>
-
-                            <a
-                                href="?category={{ category.slug }}"
-                                class="text-decoration-none text-dark">
-
-                                {{ category.name }}
-
-                            </a>
-
-                        </h5>
-
+                            <h5>
+                                <a
+                                    href="?category={{ category.slug }}"
+                                    class="text-decoration-none text-dark">
+                                    {{ category.name }}
+                                </a>
+                            </h5>
+                        </div>
                     </div>
-
                 </div>
-
-            </div>
-
             {% empty %}
-
-            <div class="col-12 text-center">
-
-                <h5>
-                    No categories available.
-                </h5>
-
-            </div>
-
+                <div class="col-12 text-center">
+                    <h5>No categories available.</h5>
+                </div>
             {% endfor %}
-
         </div>
 
     </div>
-
 </section>
 
 
 <!-- Shop by Brands -->
 <section class="py-5">
-
     <div class="container">
 
         <div class="text-center mb-5">
-
-            <h2 class="fw-bold">
-                Shop by Brands
-            </h2>
-
+            <h2 class="fw-bold">Shop by Brands</h2>
             <p class="text-muted">
                 Explore products from your favourite brands.
             </p>
-
         </div>
 
         <div class="row g-4">
-
             {% for brand in brands %}
+                <div class="col-lg-3 col-md-6">
+                    <a
+                        href="?brand={{ brand.slug }}"
+                        class="text-decoration-none text-dark">
 
-            <div class="col-lg-3 col-md-6">
+                        <div class="card shadow h-100 text-center">
+                            <div class="card-body">
 
-                <a
-                    href="?brand={{ brand.slug }}"
-                    class="text-decoration-none text-dark">
+                                {% if brand.logo %}
+                                    <img
+                                        src="{{ brand.logo.url }}"
+                                        alt="{{ brand.name }}"
+                                        class="img-fluid mb-3"
+                                        style="height:80px; object-fit:contain;">
+                                {% else %}
+                                    <h1>🏷️</h1>
+                                {% endif %}
 
-                    <div class="card shadow h-100 text-center">
+                                <h5>{{ brand.name }}</h5>
 
-                        <div class="card-body">
-
-                            {% if brand.logo %}
-
-                            <img
-                                src="{{ brand.logo.url }}"
-                                alt="{{ brand.name }}"
-                                class="img-fluid mb-3"
-                                style="height:80px; object-fit:contain;">
-
-                            {% else %}
-
-                            <h1>
-                                🏷️
-                            </h1>
-
-                            {% endif %}
-
-                            <h5>
-                                {{ brand.name }}
-                            </h5>
-
+                            </div>
                         </div>
-
-                    </div>
-
-                </a>
-
-            </div>
-
+                    </a>
+                </div>
             {% empty %}
-
-            <div class="col-12 text-center">
-
-                <h5>
-                    No brands available.
-                </h5>
-
-            </div>
-
+                <div class="col-12 text-center">
+                    <h5>No brands available.</h5>
+                </div>
             {% endfor %}
-
         </div>
 
     </div>
-
 </section>
 
 
 <!-- Featured Products -->
-<section class="py-5">
-
+<section class="py-5" id="featured-products">
     <div class="container">
 
         <!-- Section Heading -->
-        <div class="text-center mb-5">
-
-            <h2 class="fw-bold">
-                Featured Products
-            </h2>
-
+        <div class="text-center mb-4">
+            <h2 class="fw-bold">Featured Products</h2>
             <p class="text-muted">
                 Discover our fresh and popular grocery items.
             </p>
+        </div>
 
+        <!-- Product Sorting -->
+        <div class="d-flex justify-content-between align-items-center flex-wrap gap-3 mb-4">
+
+            <p class="mb-0 text-muted">
+                Browse our grocery products
+            </p>
+
+            <form method="GET" class="d-flex align-items-center gap-2">
+
+                <!-- Preserve Existing Filters -->
+                <input type="hidden" name="search" value="{{ search_query }}">
+                <input type="hidden" name="category" value="{{ selected_category }}">
+                <input type="hidden" name="brand" value="{{ selected_brand }}">
+                <input type="hidden" name="min_price" value="{{ min_price }}">
+                <input type="hidden" name="max_price" value="{{ max_price }}">
+
+                <label for="sort" class="form-label mb-0 text-nowrap">
+                    Sort by:
+                </label>
+
+                <select
+                    name="sort"
+                    id="sort"
+                    class="form-select"
+                    onchange="this.form.submit()">
+
+                    <option value="" {% if not sort_by %}selected{% endif %}>
+                        Default
+                    </option>
+
+                    <option value="name" {% if sort_by == "name" %}selected{% endif %}>
+                        Name: A to Z
+                    </option>
+
+                    <option value="-name" {% if sort_by == "-name" %}selected{% endif %}>
+                        Name: Z to A
+                    </option>
+
+                    <option value="price" {% if sort_by == "price" %}selected{% endif %}>
+                        Price: Low to High
+                    </option>
+
+                    <option value="-price" {% if sort_by == "-price" %}selected{% endif %}>
+                        Price: High to Low
+                    </option>
+
+                </select>
+
+                <noscript>
+                    <button type="submit" class="btn btn-success">
+                        Sort
+                    </button>
+                </noscript>
+            </form>
         </div>
 
         <!-- Product Cards -->
         <div class="row g-4">
 
             {% for product in products %}
+                <div class="col-lg-3 col-md-6">
+                    <div class="card shadow h-100">
 
-            <div class="col-lg-3 col-md-6">
+                        {% if product.image %}
+                            <img
+                                src="{{ product.image.url }}"
+                                class="card-img-top"
+                                alt="{{ product.name }}"
+                                style="height:220px; object-fit:cover;">
+                        {% endif %}
 
-                <div class="card shadow h-100">
+                        <div class="card-body text-center">
 
-                    {% if product.image %}
+                            <h5 class="card-title">
+                                {{ product.name }}
+                            </h5>
 
-                    <img
-                        src="{{ product.image.url }}"
-                        class="card-img-top"
-                        alt="{{ product.name }}"
-                        style="height:220px; object-fit:cover;">
+                            <p class="text-success fw-bold fs-5">
+                                ₹{{ product.price }}
+                            </p>
 
-                    {% endif %}
+                            <p class="text-muted">
+                                Stock: {{ product.stock }}
+                            </p>
 
-                    <div class="card-body text-center">
+                            <button class="btn btn-success w-100">
+                                Add to Cart
+                            </button>
 
-                        <h5 class="card-title">
-                            {{ product.name }}
-                        </h5>
-
-                        <p class="text-success fw-bold fs-5">
-                            ₹{{ product.price }}
-                        </p>
-
-                        <p class="text-muted">
-                            Stock: {{ product.stock }}
-                        </p>
-
-                        <button
-                            class="btn btn-success w-100">
-                            Add to Cart
-                        </button>
-
+                        </div>
                     </div>
-
                 </div>
 
-            </div>
-
             {% empty %}
-
-            <div class="col-12 text-center">
-
-                <h5>
-                    No products available.
-                </h5>
-
-            </div>
-
+                <div class="col-12 text-center">
+                    <h5>No products available.</h5>
+                </div>
             {% endfor %}
 
         </div>
 
     </div>
-
 </section>
-
 
 {% endblock %}
